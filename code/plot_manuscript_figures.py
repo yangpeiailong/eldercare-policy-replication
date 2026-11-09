@@ -37,15 +37,14 @@ def save(fig,name):
  plt.close(fig)
 def title(ax,s):ax.set_title(s,loc='left',fontweight='bold',fontsize=12,pad=14)
 # 1. Workflow: the measurement step serves all three branches.
-f,ax=plt.subplots(figsize=(12,7.6))
-ax.set(xlim=(0,12),ylim=(0,7.6));ax.axis('off')
+f,ax=plt.subplots(figsize=(12,6.6))
+ax.set(xlim=(0,12),ylim=(.30,6.90));ax.axis('off')
 def box(x,y,w,h,head,body,color=navy):
  ax.add_patch(FancyBboxPatch((x,y),w,h,boxstyle='round,pad=0.03,rounding_size=.10',facecolor='#f5f8fa',edgecolor=color,linewidth=1.2))
  ax.text(x+.17,y+h-.22,head,color=color,fontsize=10.8,fontweight='bold',va='top')
  ax.text(x+.17,y+h-.62,body,fontsize=9.3,va='top',linespacing=1.48)
 def arrow(x,y,x2,y2):
  ax.add_patch(FancyArrowPatch((x,y),(x2,y2),arrowstyle='-|>',mutation_scale=13,color='#778c9a',lw=1.3,shrinkA=0,shrinkB=0))
-ax.text(.1,7.31,'CORPUS CONSTRUCTION AND ANALYSIS',fontsize=16,fontweight='bold',color=navy)
 box(.1,4.88,3.65,1.95,'01  Retrieve and deduplicate','16,908 retrieved records\n571 exact title-and-body duplicates\n16,337 retained records')
 box(4.17,4.88,3.65,1.95,'02  Screen retained records','5,322 main candidates\n1,045 boundary records\n9,970 reserve records',teal)
 box(8.24,4.88,3.65,1.95,'03  Assemble main corpus','912 specialized policy candidates\n47 implementation/process records\n4,363 broader measure-bearing records',teal)
@@ -56,7 +55,6 @@ box(.1,.36,3.65,1.86,'Service profiles and trends','Full main corpus and broader
 box(4.17,.36,3.65,1.86,'Focused period comparison','Broader candidates: 1,807 vs 1,404\n2015–2018 vs 2019–2022\nRaw and standardized rates; checks\nTable 2 and Figure 4',gold)
 box(8.24,.36,3.65,1.86,'Joint mentions and context','Same 3,211 broader candidates\nCount shared and separate fragments\nRead selected passages for context\nFigure 5',teal)
 for x in [1.925,5.995,10.065]:arrow(x,2.81,x,2.27)
-ax.text(.1,.03,'Boundary and reserve records are outside the main analysis. Co-presence alone does not establish policy integration.',fontsize=8.8,color=grey)
 save(f,'fig01_workflow')
 # 2. Heatmap.
 M=np.array([[float(next(r['mention_pct'] for r in rates if r['subset']=='all_candidates' and r['text_basis']=='local_context' and r['group']==G and r['period']==p and r['category']==c)) for p in periods] for c in cn])
@@ -66,7 +64,7 @@ for i in range(9):
  for j in range(3):ax.text(j,i,f'{M[i,j]:.2f}',ha='center',va='center',color='white' if M[i,j]>35 else navy,fontsize=11)
 for s in ax.spines.values():s.set_visible(False)
 cb=f.colorbar(im,ax=ax,shrink=.75,pad=.04);cb.set_label('Documents with a local mention (%)')
-title(ax,'Service agendas in broader policy candidates');f.tight_layout();save(f,'fig02_service_profiles')
+f.tight_layout();save(f,'fig02_service_profiles')
 # 3. Three annual trajectories and a transparent denominator strip.
 years=list(range(2011,2023));f,axs=plt.subplots(4,1,figsize=(9.5,8),sharex=True,gridspec_kw={'height_ratios':[1,1,1,.65]},layout='constrained')
 for i,(cat,label,col) in enumerate(zip(focus,labels,cols)):
@@ -76,7 +74,7 @@ for i,(cat,label,col) in enumerate(zip(focus,labels,cols)):
 ns=[int(next(r['documents'] for r in annual if r['group']==G and r['category']==focus[0] and int(r['database_year'])==y)) for y in years]
 axs[3].bar(years,ns,color='#bdcbd4',width=.65);axs[3].set_ylabel('n');axs[3].set_xlabel('Database year');axs[3].set_xticks(years);axs[3].tick_params(axis='x',rotation=45)
 for y,n in zip(years,ns):axs[3].text(y,n+9,str(n),ha='center',fontsize=8)
-axs[3].set_ylim(0,max(ns)*1.32);axs[0].set_title('Annual local mention rates in broader policy candidates',loc='left',fontweight='bold',pad=12)
+axs[3].set_ylim(0,max(ns)*1.32)
 save(f,'fig03_annual_trajectories')
 # 4. Raw differences and fixed checks. No inferential intervals are drawn.
 variants=[('baseline','Raw comparison'),('without_date_flags','Exclude date flags'),('exact_same_body_sensitivity','Exact-body de-duplication'),('leave_out_2021','Omit 2021'),('leave_out_2022','Omit 2022')]
@@ -98,7 +96,7 @@ for ax,cat,label,col in zip(axs,focus,labels,cols):
  yy=np.arange(6);ax.scatter(vals,yy,color=col,s=55,zorder=3)
  for v,y in zip(vals,yy):ax.text(v+.20,y,f'{v:.2f}',va='center',fontsize=9)
  ax.axvline(0,color=grey,lw=.8);ax.set_xlim(-.3,14);ax.set_xticks([0,5,10]);ax.grid(axis='x',alpha=.2);ax.set_title(label,fontsize=11,fontweight='bold');ax.set_xlabel('Later − earlier (percentage points)')
-axs[0].set_yticks(range(6),[l for _,l in variants]+['Fixed-stratum standardization']);axs[0].invert_yaxis();f.suptitle('Direction of change under alternative descriptive specifications',fontsize=13,fontweight='bold')
+axs[0].set_yticks(range(6),[l for _,l in variants]+['Fixed-stratum standardization']);axs[0].invert_yaxis()
 save(f,'fig04_fixed_comparisons')
 # 5. Joint mentions with explicit denominators and distance.
 e=next(r for r in sens if r['group']==G and r['variant']=='baseline' and r['period']=='2015-2018')
