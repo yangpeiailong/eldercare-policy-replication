@@ -1,0 +1,30 @@
+{
+  "overall_annual_rates.csv": {
+    "source_bundle": "return_overall_content.zip",
+    "sha256": "e90efdabd3900c690cb1304353bc2c03eb65b934f73dd7db7301b934278646ce"
+  },
+  "overall_category_rates.csv": {
+    "source_bundle": "return_overall_content.zip",
+    "sha256": "0306bec25c361b9409ad0d2808429d9261e504b72c9a26c68c76cb6b196e059a"
+  },
+  "verification_sensitivity.csv": {
+    "source_bundle": "return_content_verification.zip",
+    "sha256": "a0c31297b1fbfa7868cff5bf5f5e0adceb147e38cb754acb1307f081e678b071"
+  },
+  "verification_standardized.csv": {
+    "source_bundle": "return_content_verification.zip",
+    "sha256": "5b7c0ff7e150ca1bd5b995f0f4eff58fc770609e0a7f6f58673ceb2117785aed"
+  },
+  "verification_common_strata.csv": {
+    "source_bundle": "return_content_verification.zip",
+    "sha256": "f64e07fd9d2d52d3e2704f82abfea4beb47f44439d52d3145d749c1df85bbf93"
+  },
+  "verification_annual_joint.csv": {
+    "source_bundle": "return_content_verification.zip",
+    "sha256": "5af55f56091ce23db2f49a1ee46dbb2e1246995b019bc55e7175a9079e863b9e"
+  },
+  "verification_joint_counts.csv": {
+    "source": "Grouped counts from verification_joint_documents.csv; denominator cross-checked against verification_sensitivity.csv. No document keys or titles are included.",
+    "sha256": "0a9273c0ebad9d372ae0bdaca5960db496366a3e12834ec905b0510d5f8e3397"
+  }
+}

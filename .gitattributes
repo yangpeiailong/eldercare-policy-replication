@@ -1,0 +1,2 @@
+data/aggregates/*.csv -text
+config/lexicon_v01.json -text

@@ -1,0 +1,17 @@
+{
+  "source": "Existing returned aggregate outputs; no new formal analysis",
+  "group": "\u7efc\u5408\u6587\u4ef6\u542b\u63aa\u65bd\u7ebf\u7d22",
+  "figures": [
+    "fig01",
+    "fig02",
+    "fig03",
+    "fig04",
+    "fig05"
+  ],
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "png_dpi": 400
+}

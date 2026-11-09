@@ -1,0 +1,27 @@
+{
+  "research_root": "SET_LOCAL_RESEARCH_ROOT",
+  "baseline_relative": "data/analysis/baseline_v05/results",
+  "content_relative": "data/analysis/content_v06",
+  "output_relative": "data/analysis/policy_patterns",
+  "periods": [
+    [
+      2011,
+      2014,
+      "2011-2014"
+    ],
+    [
+      2015,
+      2018,
+      "2015-2018"
+    ],
+    [
+      2019,
+      2022,
+      "2019-2022"
+    ]
+  ],
+  "digital_title_regex": "智慧|智能|互联网|数字化|信息化|信息平台",
+  "local_radius_chars": 100,
+  "dedup_min_chars": 200,
+  "evidence_per_period": 8
+}
